@@ -1,4 +1,5 @@
 import os
+import json
 import requests
 import feedparser
 
@@ -35,7 +36,16 @@ FORUM_RSS_URL = "https://foros.3dgames.com.ar/external.php?type=RSS2&forumids=24
 TELEGRAM_TOKEN = os.environ.get("TELEGRAM_TOKEN")
 TELEGRAM_CHAT_ID = os.environ.get("TELEGRAM_CHAT_ID")
 
+ML_CLIENT_ID = os.environ.get("ML_CLIENT_ID")
+ML_CLIENT_SECRET = os.environ.get("ML_CLIENT_SECRET")
+ML_TOKEN_PATH = "ml_token.json"
+
 TXT_PATH = "vistos.txt"
+
+HEADERS = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+                  "(KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
+}
 # ------------------------------------------------------
 
 
@@ -64,11 +74,45 @@ def enviar_telegram(mensaje):
         print(f"[telegram] error: {e}")
 
 
-def check_meli(vistos, watch):
+def get_meli_access_token():
+    """Renueva el access_token de ML usando el refresh_token guardado en ml_token.json."""
+    if not os.path.exists(ML_TOKEN_PATH):
+        print("[meli] falta ml_token.json - corré primero el workflow 'Vincular Mercado Libre'")
+        return None
+    if not ML_CLIENT_ID or not ML_CLIENT_SECRET:
+        print("[meli] faltan los secrets ML_CLIENT_ID / ML_CLIENT_SECRET")
+        return None
+
+    with open(ML_TOKEN_PATH) as f:
+        tok = json.load(f)
+
+    resp = requests.post(
+        "https://api.mercadolibre.com/oauth/token",
+        data={
+            "grant_type": "refresh_token",
+            "client_id": ML_CLIENT_ID,
+            "client_secret": ML_CLIENT_SECRET,
+            "refresh_token": tok["refresh_token"],
+        },
+        headers={"accept": "application/json"},
+        timeout=15,
+    )
+    resp.raise_for_status()
+    data = resp.json()
+
+    nuevo_tok = {"access_token": data["access_token"], "refresh_token": data["refresh_token"]}
+    with open(ML_TOKEN_PATH, "w") as f:
+        json.dump(nuevo_tok, f)
+
+    return nuevo_tok["access_token"]
+
+
+def check_meli(vistos, watch, access_token):
     """Avisa solo si aparece un producto usado que matchea el watch puntual."""
     url = f"https://api.mercadolibre.com/sites/{watch['meli_site']}/search"
     params = {"q": watch["meli_query"], "condition": "used", "limit": 50}
-    r = requests.get(url, params=params, timeout=15)
+    auth_headers = {**HEADERS, "Authorization": f"Bearer {access_token}"}
+    r = requests.get(url, params=params, headers=auth_headers, timeout=15)
     r.raise_for_status()
     data = r.json()
 
@@ -104,11 +148,22 @@ def check_forum(vistos):
 
 def main():
     vistos = cargar_vistos()
-    for watch in WATCHES:
-        try:
-            check_meli(vistos, watch)
-        except Exception as e:
-            print(f"[meli:{watch['nombre']}] error: {e}")
+
+    access_token = None
+    try:
+        access_token = get_meli_access_token()
+    except Exception as e:
+        print(f"[meli] error renovando token: {e}")
+
+    if access_token:
+        for watch in WATCHES:
+            try:
+                check_meli(vistos, watch, access_token)
+            except Exception as e:
+                print(f"[meli:{watch['nombre']}] error: {e}")
+    else:
+        print("[meli] omitido - sin access_token válido")
+
     try:
         check_forum(vistos)
     except Exception as e:
