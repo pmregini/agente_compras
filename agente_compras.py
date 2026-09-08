@@ -113,6 +113,8 @@ def check_meli(vistos, watch, access_token):
     params = {"q": watch["meli_query"], "condition": "used", "limit": 50}
     auth_headers = {**HEADERS, "Authorization": f"Bearer {access_token}"}
     r = requests.get(url, params=params, headers=auth_headers, timeout=15)
+    if r.status_code != 200:
+        print(f"[meli:{watch['nombre']}] status={r.status_code} body={r.text[:500]}")
     r.raise_for_status()
     data = r.json()
 
