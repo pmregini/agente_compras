@@ -2,15 +2,15 @@ name: Agente de compras
 
 on:
   schedule:
-    - cron: "*/15 * * * *"   # cada 15 min (UTC; puede demorar unos minutos según carga de GitHub)
-  workflow_dispatch: {}       # permite correrlo manualmente desde la pestaña Actions
+    - cron: "*/15 * * * *"   # cada 15 min (UTC)
+  workflow_dispatch: {}       # permite correrlo manualmente
 
 permissions:
-  contents: write            # necesario para que el job pueda hacer commit y push
+  contents: write            # necesario para el commit y push
 
 concurrency:
   group: agente-compras
-  cancel-in-progress: false  # evita que se pisen dos corridas si una se atrasa
+  cancel-in-progress: false
 
 jobs:
   run:
@@ -18,6 +18,9 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          persist-credentials: true
 
       - name: Setup Python
         uses: actions/setup-python@v5
@@ -38,5 +41,4 @@ jobs:
           git config user.name "agente-bot"
           git config user.email "agente-bot@users.noreply.github.com"
           git add vistos.txt
-          git diff --staged --quiet || git commit -m "update estado [skip ci]"
-          git push
+          git diff --staged --quiet || (git commit -m "update estado [skip ci]" && git push)
