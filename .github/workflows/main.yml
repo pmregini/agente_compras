@@ -1,0 +1,42 @@
+name: Agente de compras
+ 
+on:
+  schedule:
+    - cron: "*/15 * * * *"   # cada 15 min (UTC; puede demorar unos minutos según carga de GitHub)
+  workflow_dispatch: {}       # permite correrlo manualmente desde la pestaña Actions
+ 
+permissions:
+  contents: write            # necesario para que el job pueda hacer commit y push
+ 
+concurrency:
+  group: agente-compras
+  cancel-in-progress: false  # evita que se pisen dos corridas si una se atrasa
+ 
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+ 
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+ 
+      - name: Instalar dependencias
+        run: pip install requests feedparser
+ 
+      - name: Correr agente
+        env:
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python agente_compras.py
+ 
+      - name: Guardar vistos.txt si cambió
+        run: |
+          git config user.name "agente-bot"
+          git config user.email "agente-bot@users.noreply.github.com"
+          git add vistos.txt
+          git diff --staged --quiet || git commit -m "update vistos.txt [skip ci]"
+          git push
