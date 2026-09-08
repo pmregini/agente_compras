@@ -31,14 +31,12 @@ jobs:
         env:
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-          ML_CLIENT_ID: ${{ secrets.ML_CLIENT_ID }}
-          ML_CLIENT_SECRET: ${{ secrets.ML_CLIENT_SECRET }}
         run: python agente_compras.py
 
-      - name: Guardar cambios (vistos.txt y ml_token.json)
+      - name: Guardar cambios (vistos.txt)
         run: |
           git config user.name "agente-bot"
           git config user.email "agente-bot@users.noreply.github.com"
-          git add vistos.txt ml_token.json
+          git add vistos.txt
           git diff --staged --quiet || git commit -m "update estado [skip ci]"
           git push
