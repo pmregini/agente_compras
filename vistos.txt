@@ -21,3 +21,6 @@ forum:https://foros.3dgames.com.ar/threads/1114406-apple-watch-series-6-gps-44mm
 forum:https://foros.3dgames.com.ar/threads/1114409-combito-i7-7700-moni-27-2k-185hz-etc?goto=newpost
 forum:https://foros.3dgames.com.ar/threads/1114412-notebook-lenovo-thinkpad-t14-gen-3?goto=newpost
 forum:https://foros.3dgames.com.ar/threads/1114413-pp-samsung-galaxy-s24-fe-128gb-8gb-open-box-graphite?goto=newpost
+forum:https://foros.3dgames.com.ar/threads/1114416-venta-o-permuta-iphone-14-apple-watch-ultra2-samsung-a54?goto=newpost
+forum:https://foros.3dgames.com.ar/threads/1114415-o-permuto-mi-iphone-16-pro-desert-97-completo-e-inmaculado?goto=newpost
+forum:https://foros.3dgames.com.ar/threads/1114414-estructura-simulador-cockpit?goto=newpost
