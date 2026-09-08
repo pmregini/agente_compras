@@ -3,15 +3,33 @@ import requests
 import feedparser
 
 # ---------------------- CONFIG ----------------------
+
+# Productos puntuales a rastrear en Mercado Libre (usados)
 WATCHES = [
     {
-        "nombre": "FiiO KA13",
-        "meli_query": "fiio ka13",
+        "nombre": "Echo Show",
+        "meli_query": "echo show",
         "meli_site": "MLA",
-        "forum_keywords": ["ka13", "fiio ka13"],
     },
+      {
+        "nombre": "Hiby",
+        "meli_query": "Hiby",
+        "meli_site": "MLA",
+    },
+      {
+        "nombre": "Fiio",
+        "meli_query": "fiio",
+        "meli_site": "MLA",
+    },
+      {
+        "nombre": "Amazon Echo",
+        "meli_query": "Amazon echo",
+        "meli_site": "MLA",
+    },
+    # agregá más productos acá, mismo formato
 ]
 
+# Foro: se avisa de TODOS los temas nuevos de este subforo, sin filtrar
 FORUM_RSS_URL = "https://foros.3dgames.com.ar/external.php?type=RSS2&forumids=246"
 
 TELEGRAM_TOKEN = os.environ.get("TELEGRAM_TOKEN")
@@ -47,6 +65,7 @@ def enviar_telegram(mensaje):
 
 
 def check_meli(vistos, watch):
+    """Avisa solo si aparece un producto usado que matchea el watch puntual."""
     url = f"https://api.mercadolibre.com/sites/{watch['meli_site']}/search"
     params = {"q": watch["meli_query"], "condition": "used", "limit": 50}
     r = requests.get(url, params=params, timeout=15)
@@ -69,6 +88,7 @@ def check_meli(vistos, watch):
 
 
 def check_forum(vistos):
+    """Avisa de CADA tema nuevo del subforo, sin filtro de keywords."""
     feed = feedparser.parse(FORUM_RSS_URL)
     for entry in feed.entries:
         entry_id = f"forum:{entry.link}"
@@ -77,13 +97,9 @@ def check_forum(vistos):
         vistos.add(entry_id)
         guardar_visto(entry_id)
 
-        titulo = entry.title.lower()
-        for watch in WATCHES:
-            if any(kw.lower() in titulo for kw in watch["forum_keywords"]):
-                mensaje = f"💬 Foro 3DG - {watch['nombre']}\n{entry.title}\n{entry.link}"
-                print(mensaje)
-                enviar_telegram(mensaje)
-                break
+        mensaje = f"💬 Tema nuevo en Compra/Venta 3DG\n{entry.title}\n{entry.link}"
+        print(mensaje)
+        enviar_telegram(mensaje)
 
 
 def main():
