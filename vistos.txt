@@ -17,3 +17,4 @@ forum:https://foros.3dgames.com.ar/threads/1114396-remato-mi-tele-4k-75-quot-pp?
 forum:https://foros.3dgames.com.ar/threads/1114395-iphone-15-pro-max-256-gb-negro?goto=newpost
 forum:https://foros.3dgames.com.ar/threads/1114394-dell-poweredge-r540-xeon-silver-4110?goto=newpost
 forum:https://foros.3dgames.com.ar/threads/1114393-macbook-pro-m4-14-inch-pp?goto=newpost
+forum:https://foros.3dgames.com.ar/threads/1114406-apple-watch-series-6-gps-44mm?goto=newpost
