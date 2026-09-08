@@ -31,12 +31,14 @@ def enviar_telegram(mensaje):
         print(f"[telegram] config ausente: {mensaje}")
         return
     url = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage"
-    payload = {"chat_id": TELEGRAM_CHAT_ID, "text": mensaje, "disable_web_page_preview": False}
-    try:
-        r = requests.post(url, json=payload, timeout=15)
-        print(f"[telegram] status={r.status_code}")
-    except Exception as e:
-        print(f"[telegram] error: {e}")
+    chat_ids = [c.strip() for c in TELEGRAM_CHAT_ID.split(",") if c.strip()]
+    for chat_id in chat_ids:
+        payload = {"chat_id": chat_id, "text": mensaje, "disable_web_page_preview": False}
+        try:
+            r = requests.post(url, json=payload, timeout=15)
+            print(f"[telegram] chat_id={chat_id} status={r.status_code}")
+        except Exception as e:
+            print(f"[telegram] chat_id={chat_id} error: {e}")
 
 
 def check_forum(vistos):
