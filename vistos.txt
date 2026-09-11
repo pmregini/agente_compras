@@ -31,3 +31,5 @@ forum:https://foros.3dgames.com.ar/threads/1114440-compro-xbox-360?goto=newpost
 forum:https://foros.3dgames.com.ar/threads/1114467-silla-ergonomica-zentra-nova-color-negro-impecable-estado?goto=newpost
 forum:https://foros.3dgames.com.ar/threads/1114471-xfx-swift-amd-radeon-rx-9070xt-triple-fan-gaming-edition?goto=newpost
 forum:https://foros.3dgames.com.ar/threads/1114491-sansung-z-fold-5-nuevo-con-detalle-12-512gb-pp?goto=newpost
+forum:https://foros.3dgames.com.ar/threads/1114506-lenovo-ideapad-slim-3-8-512-en-garantia-i5-12450h?goto=newpost
+forum:https://foros.3dgames.com.ar/threads/1114501-recien-traida-notebook-2en1-hp-omnibook-x-flip-touch-core-ultra7-intel-arc-16gb-1tb?goto=newpost
