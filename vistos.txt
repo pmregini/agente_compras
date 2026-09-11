@@ -29,3 +29,4 @@ forum:https://foros.3dgames.com.ar/threads/1114431-3080-ti-pny-xlr8-rtx-5080-dd5
 forum:https://foros.3dgames.com.ar/threads/1114438-mochila-targus-tsb89104us-sport-15-6-negro-(pp)?goto=newpost
 forum:https://foros.3dgames.com.ar/threads/1114440-compro-xbox-360?goto=newpost
 forum:https://foros.3dgames.com.ar/threads/1114467-silla-ergonomica-zentra-nova-color-negro-impecable-estado?goto=newpost
+forum:https://foros.3dgames.com.ar/threads/1114471-xfx-swift-amd-radeon-rx-9070xt-triple-fan-gaming-edition?goto=newpost
