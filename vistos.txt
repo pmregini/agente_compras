@@ -35,3 +35,4 @@ forum:https://foros.3dgames.com.ar/threads/1114506-lenovo-ideapad-slim-3-8-512-e
 forum:https://foros.3dgames.com.ar/threads/1114501-recien-traida-notebook-2en1-hp-omnibook-x-flip-touch-core-ultra7-intel-arc-16gb-1tb?goto=newpost
 forum:https://foros.3dgames.com.ar/threads/1114514-moto-edge-30-ultra-cargador-125w-base-inalambrica-50w-moto?goto=newpost
 forum:https://foros.3dgames.com.ar/threads/1114513-ssd-nvme-2tb?goto=newpost
+forum:https://foros.3dgames.com.ar/threads/1114516-placa-de-video-3090ti-o-4090?goto=newpost
