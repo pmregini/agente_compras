@@ -41,3 +41,4 @@ forum:https://foros.3dgames.com.ar/threads/1114518-rtx-3060ti?goto=newpost
 forum:https://foros.3dgames.com.ar/threads/1114545-rtx-3070-ti-palit?goto=newpost
 forum:https://foros.3dgames.com.ar/threads/1114544-celular-de-coleccion-samsung-i8510-innov8?goto=newpost
 forum:https://foros.3dgames.com.ar/threads/1114543-popurri-de-cosas-que-sobran-en-la-casa-pasa-a-chusmear-p-p?goto=newpost
+forum:https://foros.3dgames.com.ar/threads/1114546-cosas-varias-ryzen-5-3600x-fuente-550w-rx-470-4gb-pp?goto=newpost
