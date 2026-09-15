@@ -46,3 +46,4 @@ forum:https://foros.3dgames.com.ar/threads/1114553-570-8-gb-asus-y-gigabyte-y-di
 forum:https://foros.3dgames.com.ar/threads/1114556-iphone-16-128gb-black-96-completo-en-caja-super-pp?goto=newpost
 forum:https://foros.3dgames.com.ar/threads/1114555-iphone-16-pro-128-gb-black-sim-esim-pp?goto=newpost
 forum:https://foros.3dgames.com.ar/threads/1114554-notebook-basica-para-ofimatica-hay-p-p?goto=newpost
+forum:https://foros.3dgames.com.ar/threads/1114557-pp-samsung-galaxy-s24-fe-256gb-8gb-open-box-graphite-x2?goto=newpost
