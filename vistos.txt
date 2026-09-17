@@ -64,3 +64,5 @@ forum:https://foros.3dgames.com.ar/threads/1114608-ipad-pro-m4-11-pulgadas-256gb
 forum:https://foros.3dgames.com.ar/threads/1114606-notebook-lenovo-thinkpad-l14-gen5-32gb-ram-t14-gen-2-i5-1145g7-16gb-ram?goto=newpost
 forum:https://foros.3dgames.com.ar/threads/1114621-samsung-flip-7-256-pp?goto=newpost
 forum:https://foros.3dgames.com.ar/threads/1114618-remato-hardware-(todo-menos-vga)?goto=newpost
+forum:https://foros.3dgames.com.ar/threads/1114623-sillas-haworth-classic-impecable?goto=newpost
+forum:https://foros.3dgames.com.ar/threads/1114622-i7-6700-7700?goto=newpost
