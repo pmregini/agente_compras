@@ -60,3 +60,5 @@ forum:https://foros.3dgames.com.ar/threads/1114592-vendo-mi-1080ti-11-gb?goto=ne
 forum:https://foros.3dgames.com.ar/threads/1114601-anafe-induccion-samsung-virtual-flame-sin-uso-en-caja?goto=newpost
 forum:https://foros.3dgames.com.ar/threads/1114599-mega-ultra-venta-de-garage-volumen-9000-ryzen-3-ahtlon-3000g-dual-core-am3-am4?goto=newpost
 forum:https://foros.3dgames.com.ar/threads/1114597-rx-5700xt-8gb?goto=newpost
+forum:https://foros.3dgames.com.ar/threads/1114608-ipad-pro-m4-11-pulgadas-256gb-apple-pencil-pro-pp?goto=newpost
+forum:https://foros.3dgames.com.ar/threads/1114606-notebook-lenovo-thinkpad-l14-gen5-32gb-ram-t14-gen-2-i5-1145g7-16gb-ram?goto=newpost
