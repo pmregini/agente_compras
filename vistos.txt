@@ -71,3 +71,5 @@ forum:https://foros.3dgames.com.ar/threads/1114648-liquido-pedalera-nux-mg300?go
 forum:https://foros.3dgames.com.ar/threads/1114642-lavarropas-barra-de-sonido-mesa-plegable-bobovr-monitor-24-ventilador?goto=newpost
 forum:https://foros.3dgames.com.ar/threads/1114651-venta-o-permuta-rx-9070-xt-asrock-steel-series-black-pp?goto=newpost
 forum:https://foros.3dgames.com.ar/threads/1114650-ps4-pro-firm-11-goldhen-completa-con-juegos-pp?goto=newpost
+forum:https://foros.3dgames.com.ar/threads/1114653-google-pixel-11-pro-16-512-gb-olive-muy-poco-uso-impecable-funda-y-vidrio?goto=newpost
+forum:https://foros.3dgames.com.ar/threads/1114652-iphone-17-o-17-pro?goto=newpost
