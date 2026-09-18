@@ -69,3 +69,5 @@ forum:https://foros.3dgames.com.ar/threads/1114622-i7-6700-7700?goto=newpost
 forum:https://foros.3dgames.com.ar/threads/1114626-google-pixel-9a-128gb-cositas?goto=newpost
 forum:https://foros.3dgames.com.ar/threads/1114648-liquido-pedalera-nux-mg300?goto=newpost
 forum:https://foros.3dgames.com.ar/threads/1114642-lavarropas-barra-de-sonido-mesa-plegable-bobovr-monitor-24-ventilador?goto=newpost
+forum:https://foros.3dgames.com.ar/threads/1114651-venta-o-permuta-rx-9070-xt-asrock-steel-series-black-pp?goto=newpost
+forum:https://foros.3dgames.com.ar/threads/1114650-ps4-pro-firm-11-goldhen-completa-con-juegos-pp?goto=newpost
