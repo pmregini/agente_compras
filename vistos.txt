@@ -67,3 +67,5 @@ forum:https://foros.3dgames.com.ar/threads/1114618-remato-hardware-(todo-menos-v
 forum:https://foros.3dgames.com.ar/threads/1114623-sillas-haworth-classic-impecable?goto=newpost
 forum:https://foros.3dgames.com.ar/threads/1114622-i7-6700-7700?goto=newpost
 forum:https://foros.3dgames.com.ar/threads/1114626-google-pixel-9a-128gb-cositas?goto=newpost
+forum:https://foros.3dgames.com.ar/threads/1114648-liquido-pedalera-nux-mg300?goto=newpost
+forum:https://foros.3dgames.com.ar/threads/1114642-lavarropas-barra-de-sonido-mesa-plegable-bobovr-monitor-24-ventilador?goto=newpost
