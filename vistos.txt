@@ -66,3 +66,4 @@ forum:https://foros.3dgames.com.ar/threads/1114621-samsung-flip-7-256-pp?goto=ne
 forum:https://foros.3dgames.com.ar/threads/1114618-remato-hardware-(todo-menos-vga)?goto=newpost
 forum:https://foros.3dgames.com.ar/threads/1114623-sillas-haworth-classic-impecable?goto=newpost
 forum:https://foros.3dgames.com.ar/threads/1114622-i7-6700-7700?goto=newpost
+forum:https://foros.3dgames.com.ar/threads/1114626-google-pixel-9a-128gb-cositas?goto=newpost
