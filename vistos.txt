@@ -75,3 +75,4 @@ forum:https://foros.3dgames.com.ar/threads/1114653-google-pixel-11-pro-16-512-gb
 forum:https://foros.3dgames.com.ar/threads/1114652-iphone-17-o-17-pro?goto=newpost
 forum:https://foros.3dgames.com.ar/threads/1114662-ssd-samsung-990-hearsink-tb?goto=newpost
 forum:https://foros.3dgames.com.ar/threads/1114664-nintendo-switch-2-juegos-sd-cargador-ugreen?goto=newpost
+forum:https://foros.3dgames.com.ar/threads/1114669-nintendoswitch-rtx3080-acerpredatorx34p-acerswiftx14oledrtx4050?goto=newpost
