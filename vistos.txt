@@ -94,3 +94,4 @@ forum:https://foros.3dgames.com.ar/threads/1114702-gabinetes-lian-li-o11-air-min
 forum:https://foros.3dgames.com.ar/threads/1114709-google-pixel-4a-4g-128-gb-—-excelente-estado-—-bateria-atl-nueva?goto=newpost
 forum:https://foros.3dgames.com.ar/threads/1114708-ford-falcon-modelo-80-53-000-kms-reales?goto=newpost
 forum:https://foros.3dgames.com.ar/threads/1114712-edifier-c200-y-mixer-hercules?goto=newpost
+forum:https://foros.3dgames.com.ar/threads/1114729-notebook-memorias-y-otros?goto=newpost
