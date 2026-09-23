@@ -95,3 +95,4 @@ forum:https://foros.3dgames.com.ar/threads/1114709-google-pixel-4a-4g-128-gb-—
 forum:https://foros.3dgames.com.ar/threads/1114708-ford-falcon-modelo-80-53-000-kms-reales?goto=newpost
 forum:https://foros.3dgames.com.ar/threads/1114712-edifier-c200-y-mixer-hercules?goto=newpost
 forum:https://foros.3dgames.com.ar/threads/1114729-notebook-memorias-y-otros?goto=newpost
+forum:https://foros.3dgames.com.ar/threads/1114731-notebook-lenovo-thinkpad-t480?goto=newpost
