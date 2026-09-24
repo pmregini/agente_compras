@@ -98,3 +98,4 @@ forum:https://foros.3dgames.com.ar/threads/1114729-notebook-memorias-y-otros?got
 forum:https://foros.3dgames.com.ar/threads/1114731-notebook-lenovo-thinkpad-t480?goto=newpost
 forum:https://foros.3dgames.com.ar/threads/1114746-fuentes-servidor-cosas-mining?goto=newpost
 forum:https://foros.3dgames.com.ar/threads/1114744-vendo-apple-studio-display-27?goto=newpost
+forum:https://foros.3dgames.com.ar/threads/1114755-celular-samsung-s25-ultra-256gb-12gb-titanium-blue-con-funda-y-caja-original?goto=newpost
