@@ -99,3 +99,6 @@ forum:https://foros.3dgames.com.ar/threads/1114731-notebook-lenovo-thinkpad-t480
 forum:https://foros.3dgames.com.ar/threads/1114746-fuentes-servidor-cosas-mining?goto=newpost
 forum:https://foros.3dgames.com.ar/threads/1114744-vendo-apple-studio-display-27?goto=newpost
 forum:https://foros.3dgames.com.ar/threads/1114755-celular-samsung-s25-ultra-256gb-12gb-titanium-blue-con-funda-y-caja-original?goto=newpost
+forum:https://foros.3dgames.com.ar/threads/1114776-iphone-17-pro-max-256gb-naranja-venta-permuta?goto=newpost
+forum:https://foros.3dgames.com.ar/threads/1114775-lenovo-legion-5-gen10-rtx5060-ryzen-ai7-32gb-1tb-ssd-con-garantia-full-activa?goto=newpost
+forum:https://foros.3dgames.com.ar/threads/1114774-samsung-galaxy-buds-4-pro-(nuevos-con-factura-y-garantia)?goto=newpost
