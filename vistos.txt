@@ -104,3 +104,4 @@ forum:https://foros.3dgames.com.ar/threads/1114775-lenovo-legion-5-gen10-rtx5060
 forum:https://foros.3dgames.com.ar/threads/1114774-samsung-galaxy-buds-4-pro-(nuevos-con-factura-y-garantia)?goto=newpost
 forum:https://foros.3dgames.com.ar/threads/1114778-mini-pcs-hp-y-lenovo-cpu-intel-kits-amd-y-mas-pp?goto=newpost
 forum:https://foros.3dgames.com.ar/threads/1114781-vendo-sintoamplificador-marantz-sr5012?goto=newpost
+forum:https://foros.3dgames.com.ar/threads/1114787-nintendo-switch-oled-con-magia-p-p?goto=newpost
