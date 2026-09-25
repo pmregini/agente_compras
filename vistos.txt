@@ -105,3 +105,5 @@ forum:https://foros.3dgames.com.ar/threads/1114774-samsung-galaxy-buds-4-pro-(nu
 forum:https://foros.3dgames.com.ar/threads/1114778-mini-pcs-hp-y-lenovo-cpu-intel-kits-amd-y-mas-pp?goto=newpost
 forum:https://foros.3dgames.com.ar/threads/1114781-vendo-sintoamplificador-marantz-sr5012?goto=newpost
 forum:https://foros.3dgames.com.ar/threads/1114787-nintendo-switch-oled-con-magia-p-p?goto=newpost
+forum:https://foros.3dgames.com.ar/threads/1114806-muebles-varios-por-mudanza?goto=newpost
+forum:https://foros.3dgames.com.ar/threads/1114805-combo-ryzen?goto=newpost
