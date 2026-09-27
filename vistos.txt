@@ -114,3 +114,4 @@ forum:https://foros.3dgames.com.ar/threads/1114836-placa-de-video-rx-6700-10gb-p
 forum:https://foros.3dgames.com.ar/threads/1114838-acer-nitro-intel-arc-b580-12gb-elgato-4k-pro-mk2-usados?goto=newpost
 forum:https://foros.3dgames.com.ar/threads/1114841-lavarropas-candy-inverter-40cm?goto=newpost
 forum:https://foros.3dgames.com.ar/threads/1114840-macbook-air-m1-y-m2-oferta-reviente?goto=newpost
+forum:https://foros.3dgames.com.ar/threads/1114842-vendo-combito-que-me-sobra-pp?goto=newpost
