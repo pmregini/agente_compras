@@ -116,3 +116,5 @@ forum:https://foros.3dgames.com.ar/threads/1114841-lavarropas-candy-inverter-40c
 forum:https://foros.3dgames.com.ar/threads/1114840-macbook-air-m1-y-m2-oferta-reviente?goto=newpost
 forum:https://foros.3dgames.com.ar/threads/1114842-vendo-combito-que-me-sobra-pp?goto=newpost
 forum:https://foros.3dgames.com.ar/threads/1114852-mac-mini?goto=newpost
+forum:https://foros.3dgames.com.ar/threads/1114858-limpieza-de-redes-routers-switchs-aps-y-poe?goto=newpost
+forum:https://foros.3dgames.com.ar/threads/1114857-samsung-s26-ultra?goto=newpost
