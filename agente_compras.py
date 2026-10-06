@@ -53,31 +53,48 @@ def extraer_thread_id(link):
     return link.split('?')[0]
 
 
-def check_forum(vistos):
+def descargar_rss():
     headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
     }
-    
-    # 1. Intentamos la descarga directa
-    content = None
+
+    # 1. Intento directo
     try:
         r = requests.get(FORUM_RSS_URL, headers=headers, timeout=10)
         if r.status_code == 200:
-            content = r.content
+            print("[forum] Descarga directa exitosa.")
+            return r.content
     except Exception:
         pass
 
-    # 2. Si falla o da 403, usamos el proxy intermediario
-    if not content:
-        print("[forum] Descarga directa bloqueada (403). Usando proxy intermediario...")
-        proxy_url = f"https://api.allorigins.win/raw?url={requests.utils.quote(FORUM_RSS_URL)}"
+    print("[forum] Descarga directa bloqueada (403/timeout). Probando proxies intermediarios...")
+
+    # 2. Lista de proxies públicos con rotación automática
+    encoded_url = requests.utils.quote(FORUM_RSS_URL)
+    proxies = [
+        f"https://api.codetabs.com/v1/proxy?quest={encoded_url}",
+        f"https://api.allorigins.win/raw?url={encoded_url}",
+        f"https://corsproxy.io/?{encoded_url}",
+    ]
+
+    for proxy_url in proxies:
         try:
-            r_proxy = requests.get(proxy_url, headers=headers, timeout=15)
-            r_proxy.raise_for_status()
-            content = r_proxy.content
+            print(f"[forum] Intentando con proxy: {proxy_url.split('/')[2]}...")
+            r = requests.get(proxy_url, headers=headers, timeout=25)
+            if r.status_code == 200 and len(r.content) > 0:
+                print(f"[forum] Descarga exitosa vía {proxy_url.split('/')[2]}.")
+                return r.content
         except Exception as e:
-            print(f"[forum] Error al descargar con proxy: {e}")
-            return
+            print(f"[forum] Falló proxy {proxy_url.split('/')[2]}: {e}")
+
+    return None
+
+
+def check_forum(vistos):
+    content = descargar_rss()
+    if not content:
+        print("[forum] Error fatal: No se pudo obtener el RSS desde ninguna fuente.")
+        return
 
     feed = feedparser.parse(content)
     print(f"[forum] Ítems encontrados en el RSS: {len(feed.entries)}")
