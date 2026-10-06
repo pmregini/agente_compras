@@ -8,6 +8,7 @@ FORUM_RSS_URL = "https://foros.3dgames.com.ar/external.php?type=RSS2&forumids=24
 
 TELEGRAM_TOKEN = os.environ.get("TELEGRAM_TOKEN")
 TELEGRAM_CHAT_ID = os.environ.get("TELEGRAM_CHAT_ID")
+SCRAPER_API_KEY = os.environ.get("SCRAPER_API_KEY")
 TXT_PATH = "vistos.txt"
 # -----------------------------------------------------------
 
@@ -58,30 +59,41 @@ def descargar_rss():
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
     }
 
-    # 1. Intento directo
+    # 1. Si tenemos ScraperAPI configurado, lo usamos como primera opción (Saltea Cloudflare)
+    if SCRAPER_API_KEY:
+        print("[forum] Descargando vía ScraperAPI...")
+        scraper_url = f"http://api.scraperapi.com?api_key={SCRAPER_API_KEY}&url={requests.utils.quote(FORUM_RSS_URL)}"
+        try:
+            r = requests.get(scraper_url, timeout=30)
+            if r.status_code == 200 and b"<rss" in r.content.lower():
+                print("[forum] Descarga exitosa con ScraperAPI.")
+                return r.content
+            else:
+                print(f"[forum] ScraperAPI devolvió status {r.status_code} o contenido no RSS.")
+        except Exception as e:
+            print(f"[forum] Error con ScraperAPI: {e}")
+
+    # 2. Intento directo como respaldo
     try:
         r = requests.get(FORUM_RSS_URL, headers=headers, timeout=10)
-        if r.status_code == 200:
+        if r.status_code == 200 and b"<rss" in r.content.lower():
             print("[forum] Descarga directa exitosa.")
             return r.content
     except Exception:
         pass
 
-    print("[forum] Descarga directa bloqueada (403/timeout). Probando proxies intermediarios...")
-
-    # 2. Lista de proxies públicos con rotación automática
+    # 3. Proxies públicos de reserva
+    print("[forum] Intentando con proxies alternativos...")
     encoded_url = requests.utils.quote(FORUM_RSS_URL)
     proxies = [
         f"https://api.codetabs.com/v1/proxy?quest={encoded_url}",
         f"https://api.allorigins.win/raw?url={encoded_url}",
-        f"https://corsproxy.io/?{encoded_url}",
     ]
 
     for proxy_url in proxies:
         try:
-            print(f"[forum] Intentando con proxy: {proxy_url.split('/')[2]}...")
             r = requests.get(proxy_url, headers=headers, timeout=25)
-            if r.status_code == 200 and len(r.content) > 0:
+            if r.status_code == 200 and b"<rss" in r.content.lower():
                 print(f"[forum] Descarga exitosa vía {proxy_url.split('/')[2]}.")
                 return r.content
         except Exception as e:
@@ -93,11 +105,11 @@ def descargar_rss():
 def check_forum(vistos):
     content = descargar_rss()
     if not content:
-        print("[forum] Error fatal: No se pudo obtener el RSS desde ninguna fuente.")
+        print("[forum] Error fatal: No se pudo obtener el RSS válido desde ninguna fuente.")
         return
 
     feed = feedparser.parse(content)
-    print(f"[forum] Ítems encontrados en el RSS: {len(feed.entries)}")
+    print(f"[forum] Ítems válidos encontrados en el RSS: {len(feed.entries)}")
     nuevos = []
 
     for entry in feed.entries:
