@@ -54,23 +54,32 @@ def extraer_thread_id(link):
 
 
 def check_forum(vistos):
-    # Encabezados completos para evitar el bloqueo 403 Forbidden de 3DGames
     headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
-        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
-        "Accept-Language": "es-ES,es;q=0.9,en;q=0.8",
-        "Cache-Control": "no-cache",
     }
     
-    session = requests.Session()
+    # 1. Intentamos la descarga directa
+    content = None
     try:
-        response = session.get(FORUM_RSS_URL, headers=headers, timeout=15)
-        response.raise_for_status()
-        feed = feedparser.parse(response.content)
-    except Exception as e:
-        print(f"[forum] error al descargar RSS: {e}")
-        return
+        r = requests.get(FORUM_RSS_URL, headers=headers, timeout=10)
+        if r.status_code == 200:
+            content = r.content
+    except Exception:
+        pass
 
+    # 2. Si falla o da 403, usamos el proxy intermediario
+    if not content:
+        print("[forum] Descarga directa bloqueada (403). Usando proxy intermediario...")
+        proxy_url = f"https://api.allorigins.win/raw?url={requests.utils.quote(FORUM_RSS_URL)}"
+        try:
+            r_proxy = requests.get(proxy_url, headers=headers, timeout=15)
+            r_proxy.raise_for_status()
+            content = r_proxy.content
+        except Exception as e:
+            print(f"[forum] Error al descargar con proxy: {e}")
+            return
+
+    feed = feedparser.parse(content)
     print(f"[forum] Ítems encontrados en el RSS: {len(feed.entries)}")
     nuevos = []
 
