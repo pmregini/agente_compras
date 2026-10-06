@@ -1,10 +1,9 @@
 import os
+import re
 import requests
 import feedparser
 
 # ---------------------- CONFIG ----------------------
-
-# Foro: se avisa de TODOS los temas nuevos de este subforo, sin filtrar
 FORUM_RSS_URL = "https://foros.3dgames.com.ar/external.php?type=RSS2&forumids=246"
 
 TELEGRAM_TOKEN = os.environ.get("TELEGRAM_TOKEN")
@@ -41,27 +40,51 @@ def enviar_telegram(mensaje):
             print(f"[telegram] chat_id={chat_id} error: {e}")
 
 
+def extraer_thread_id(link):
+    """
+    Extrae el ID único del thread de URLs como:
+    https://foros.3dgames.com.ar/threads/1114858-limpieza-de-redes...
+    Devuelve '1114858'
+    """
+    match = re.search(r'threads/(\d+)', link)
+    if match:
+        return match.group(1)
+    # Si no matchea el patrón estándar, usamos la URL limpia sin parámetros query (?)
+    return link.split('?')[0]
+
+
 def check_forum(vistos):
     """Junta TODOS los temas nuevos del subforo y los manda en un solo mensaje agrupado."""
     feed = feedparser.parse(FORUM_RSS_URL)
     nuevos = []
 
     for entry in feed.entries:
-        entry_id = f"forum:{entry.link}"
-        if entry_id in vistos:
+        # Extraemos el ID numérico del tema para que sea 100% único e inmune a los 'UPs'
+        thread_id = extraer_thread_id(entry.link)
+        entry_key = f"forum:{thread_id}"
+
+        if entry_key in vistos:
             continue
-        vistos.add(entry_id)
-        guardar_visto(entry_id)
-        nuevos.append(entry)
+
+        # Limpiamos el link quitándole el '?goto=newpost' para que quede prolijo en Telegram
+        clean_link = entry.link.split('?')[0]
+
+        vistos.add(entry_key)
+        guardar_visto(entry_key)
+        
+        # Guardamos la entrada modificada con el link limpio
+        entry_copy = entry
+        entry_copy.link = clean_link
+        nuevos.append(entry_copy)
 
     if not nuevos:
+        print("[forum] No hay temas nuevos.")
         return
 
     encabezado = f"💬 {len(nuevos)} tema(s) nuevo(s) en Compra/Venta 3DG\n\n"
     bloque = encabezado
     for entry in nuevos:
         linea = f"• {entry.title}\n{entry.link}\n\n"
-        # Telegram corta mensajes largos (~4096 caracteres); si se pasa, mandamos en partes.
         if len(bloque) + len(linea) > 3500:
             print(bloque)
             enviar_telegram(bloque)
