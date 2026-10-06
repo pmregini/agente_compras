@@ -4,35 +4,15 @@ import requests
 import feedparser
 
 # ---------------------- CONFIGURACIÓN ----------------------
-
-# 1. MERCADO LIBRE: Productos específicos a monitorear
-WATCHES_MELI = [
-    {
-        "nombre": "Echo Show",
-        "query": "echo show",
-        "site": "MLA",
-    },
-    # Podés sumar más ítems agregando bloques como este:
-    # {
-    #     "nombre": "Kindle Paperwhite",
-    #     "query": "kindle paperwhite",
-    #     "site": "MLA",
-    # },
-]
-
-# 2. FORO 3DGAMES: URL del RSS del subforo Compra/Venta Usados
 FORUM_RSS_URL = "https://foros.3dgames.com.ar/external.php?type=RSS2&forumids=246"
 
-# Credenciales desde las variables de GitHub
 TELEGRAM_TOKEN = os.environ.get("TELEGRAM_TOKEN")
 TELEGRAM_CHAT_ID = os.environ.get("TELEGRAM_CHAT_ID")
 TXT_PATH = "vistos.txt"
-
 # -----------------------------------------------------------
 
 
 def cargar_vistos():
-    """Carga los IDs procesados anteriormente. Si no existe el archivo, lo crea."""
     if not os.path.exists(TXT_PATH):
         with open(TXT_PATH, "w", encoding="utf-8") as f:
             pass
@@ -42,13 +22,11 @@ def cargar_vistos():
 
 
 def guardar_visto(item_id):
-    """Guarda un nuevo ID procesado en el archivo vistos.txt."""
     with open(TXT_PATH, "a", encoding="utf-8") as f:
         f.write(f"{item_id}\n")
 
 
 def enviar_telegram(mensaje):
-    """Manda notificaciones a Telegram (soporta múltiples IDs separados por coma)."""
     if not TELEGRAM_TOKEN or not TELEGRAM_CHAT_ID:
         print(f"[telegram Error]: Falta configurar credenciales\n{mensaje}")
         return
@@ -69,62 +47,24 @@ def enviar_telegram(mensaje):
 
 
 def extraer_thread_id(link):
-    """
-    Extrae el ID numérico único del thread de 3DGames.
-    Ejemplo: de 'https://foros.3dgames.com.ar/threads/1114858-limpieza...' extrae '1114858'
-    """
     match = re.search(r'threads/(\d+)', link)
     if match:
         return match.group(1)
     return link.split('?')[0]
 
 
-def check_meli(vistos):
-    """Revisa publicaciones usadas en Mercado Libre según la lista WATCHES_MELI."""
-    headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
-    }
-    for watch in WATCHES_MELI:
-        try:
-            url = f"https://api.mercadolibre.com/sites/{watch['site']}/search"
-            params = {"q": watch["query"], "condition": "used", "limit": 50}
-            r = requests.get(url, params=params, headers=headers, timeout=15)
-            r.raise_for_status()
-            data = r.json()
-
-            nuevos_count = 0
-            for item in data.get("results", []):
-                item_id = f"meli:{item['id']}"
-                if item_id in vistos:
-                    continue
-
-                vistos.add(item_id)
-                guardar_visto(item_id)
-                nuevos_count += 1
-
-                mensaje = (
-                    f"🛒 ML Usado - {watch['nombre']}\n\n"
-                    f"📦 {item['title']}\n"
-                    f"💰 ${item['price']}\n"
-                    f"🔗 {item['permalink']}"
-                )
-                print(f"[Nuevo en ML]: {item['title']}")
-                enviar_telegram(mensaje)
-                
-            if nuevos_count == 0:
-                print(f"[meli:{watch['nombre']}] Sin items nuevos.")
-        except Exception as e:
-            print(f"[meli:{watch['nombre']}] error: {e}")
-
-
 def check_forum(vistos):
-    """Descarga el RSS del foro con User-Agent de navegador y procesa todos los temas nuevos."""
+    # Encabezados completos para evitar el bloqueo 403 Forbidden de 3DGames
     headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
+        "Accept-Language": "es-ES,es;q=0.9,en;q=0.8",
+        "Cache-Control": "no-cache",
     }
     
+    session = requests.Session()
     try:
-        response = requests.get(FORUM_RSS_URL, headers=headers, timeout=15)
+        response = session.get(FORUM_RSS_URL, headers=headers, timeout=15)
         response.raise_for_status()
         feed = feedparser.parse(response.content)
     except Exception as e:
@@ -171,11 +111,6 @@ def check_forum(vistos):
 
 def main():
     vistos = cargar_vistos()
-    
-    # 1. Chequeo de Mercado Libre
-    check_meli(vistos)
-    
-    # 2. Chequeo de Foro 3DGames
     try:
         check_forum(vistos)
     except Exception as e:
